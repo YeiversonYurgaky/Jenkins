@@ -72,7 +72,7 @@ class SaltGeneratorTest {
             saltGenerator.generateSalt(3);
         });
 
-        assertEquals("The salt contains 3 consecutive characters: A, B, Cxx", exception.getMessage());
+        assertEquals("The salt contains 3 consecutive characters: A, B, C", exception.getMessage());
     }
 
     @Test
