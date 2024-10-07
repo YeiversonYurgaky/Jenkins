@@ -19,6 +19,9 @@ public class SaltGenerator {
     }
 
     public String generateSalt(int length) throws RepeatedCharacterException, ConsecutiveCharacterException, InvalidLengthException, DuplicateSaltException {
+        if (length <= 2) {
+            throw new InvalidLengthException("The length must be greater than 2.");
+        }
 
         String salt = generateRandomSalt(length);
 
