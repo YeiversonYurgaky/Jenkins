@@ -15,11 +15,11 @@ public class SaltGenerator {
 
     public SaltGenerator(SimpleRandomProvider random) {
         this.random = random;
-        this.generatedSalts = new HashSet<>();//my comment
+        this.generatedSalts = new HashSet<>();
     }
 
     public String generateSalt(int length) throws RepeatedCharacterException, ConsecutiveCharacterException, InvalidLengthException, DuplicateSaltException {
-        if (length <= 2) {
+        if (length <= 1) {
             throw new InvalidLengthException("The length must be greater than 2.");
         }
 
