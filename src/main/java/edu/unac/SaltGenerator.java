@@ -15,7 +15,7 @@ public class SaltGenerator {
 
     public SaltGenerator(SimpleRandomProvider random) {
         this.random = random;
-        this.generatedSalts = new HashSet<>();
+        this.generatedSalts = new HashSet<>();//my comment
     }
 
     public String generateSalt(int length) throws RepeatedCharacterException, ConsecutiveCharacterException, InvalidLengthException, DuplicateSaltException {
