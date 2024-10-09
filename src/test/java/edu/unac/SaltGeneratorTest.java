@@ -35,6 +35,36 @@ class SaltGeneratorTest {
     }
 
     @Test
+    void generateSaltWithInvalidLength() {
+        InvalidLengthException exception = assertThrows(InvalidLengthException.class, () -> {
+            saltGenerator.generateSalt(2);
+        });
+
+        assertEquals("The length must be greater than 2.", exception.getMessage());
+    }
+
+    @Test
+    void generateSaltWithRepeatedCharacters() {
+        when(mockRandomProvider.nextInt(62)).thenReturn(0, 0, 0); // Intentionally produce "AAA"
+
+        RepeatedCharacterException exception = assertThrows(RepeatedCharacterException.class, () -> {
+            saltGenerator.generateSalt(3);
+        });
+
+        assertEquals("The salt contains 3 consecutively repeated characters: A", exception.getMessage());
+    }
+
+    @Test
+    void generateSaltWithRepeatedCharactersOnlyTwo() throws ConsecutiveCharacterException, InvalidLengthException, DuplicateSaltException, RepeatedCharacterException {
+        when(mockRandomProvider.nextInt(62)).thenReturn(0, 0, 1); // Intentionally produce "AAA"
+
+        String salt = saltGenerator.generateSalt(3);
+        assertNotNull(salt);
+        assertEquals(3, salt.length());
+        assertEquals("AAB", salt);
+    }
+
+    @Test
     void generateSaltWithConsecutiveCharacters() {
         when(mockRandomProvider.nextInt(62)).thenReturn(0, 1, 2); // Intentionally produce "ABC"
 
