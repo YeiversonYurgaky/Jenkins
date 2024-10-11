@@ -10,6 +10,7 @@ import java.security.SecureRandom;
 public class Main {
     public static void main(String[] args) {
         //testJenkins
+        //testJenkins2
         SimpleRandomProvider secureRandom = new SimpleRandomProvider();
         SaltGenerator saltGenerator = new SaltGenerator(secureRandom);
 
